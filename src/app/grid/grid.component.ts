@@ -14,6 +14,7 @@ export class GridComponent implements OnInit {
   filterColumn: string[] = [];
   values: string[] = [];
   showColums = false;
+  showFilter = false;
   ngOnInit() {
   }
 
@@ -40,11 +41,8 @@ export class GridComponent implements OnInit {
   }
   toggleColumns() {
     this.showColums = !this.showColums;
-    console.log(this.showColums);
   }
-  trackRecord(index, item) {
-    console.log(index);
-    console.log(item);
-    return item ? item.id : undefined;
+  toggleFilters() {
+    this.showFilter = !this.showFilter;
   }
 }

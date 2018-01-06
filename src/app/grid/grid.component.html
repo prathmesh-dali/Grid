@@ -1,26 +1,25 @@
 <div>
-  <button type="button" (click)="toggleColumns()">{{showColums?'Hide':'Show'}}</button>
+  <button type="button" (click)="toggleColumns()">{{showColums?'Hide Columns':'Show Columns'}}</button>
+  <button type="button" (click)="toggleFilters()">{{showFilter?'Hide Filters':'Show Filters'}}</button>
   <table border="1">
     <thead>
       <tr>
         <th (click)="onSortClick('FromIACode')">
           IA Code
-          <input (input)="addFilter($event)" name="FromIACode">
         </th>
-        <th (click)="onSortClick('FromIACodeName')" [hidden]="showColums">
+        <th (click)="onSortClick('FromIACodeName')" [hidden]="!showColums">
           Online Name
         </th>
-        <th (click)="onSortClick('FromIACodeFees')" [hidden]="showColums">
+        <th (click)="onSortClick('FromIACodeFees')" [hidden]="!showColums">
           Annual Basic Fee
         </th>
         <th (click)="onSortClick('ToIACode')">
           IA Code
-          <input (input)="addFilter($event)" name="ToIACode">
         </th>
-        <th (click)="onSortClick('ToIACodeName')" [hidden]="showColums">
+        <th (click)="onSortClick('ToIACodeName')" [hidden]="!showColums">
           Online Name
         </th>
-        <th (click)="onSortClick('ToIACodeFees')" [hidden]="showColums">
+        <th (click)="onSortClick('ToIACodeFees')" [hidden]="!showColums">
           Annual Basic Fee
         </th>
         <th (click)="onSortClick('EffectiveDate')">
@@ -39,15 +38,50 @@
           Remarks
         </th>
       </tr>
+      <tr [hidden]="!showFilter">
+          <td>
+            <input (input)="addFilter($event)" name="FromIACode">
+          </td>
+          <td [hidden]="!showColums">
+              <input (input)="addFilter($event)" name="FromIACodeName">
+          </td>
+          <td [hidden]="!showColums">
+              <input (input)="addFilter($event)" name="FromIACodeFees">
+          </td>
+          <td>
+            <input (input)="addFilter($event)" name="ToIACode">
+          </td>
+          <td [hidden]="!showColums">
+              <input (input)="addFilter($event)" name="ToIACodeName">
+          </td>
+          <td [hidden]="!showColums">
+              <input (input)="addFilter($event)" name="ToIACodeFees">
+          </td>
+          <td>
+              <input (input)="addFilter($event)" name="EffectiveDate">
+          </td>
+          <td>
+              <input (input)="addFilter($event)" name="EndDate">
+          </td>
+          <td>
+              <input (input)="addFilter($event)" name="Action">
+          </td>
+          <td>
+              <input (input)="addFilter($event)" name="ValidationStatus">
+          </td>
+          <td>
+              <input (input)="addFilter($event)" name="Remarks">
+          </td>
+        </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of data | filter: filterColumn : values | sort: sortBy: asc">
         <td>{{item.FromIACode}}</td>
-        <td [hidden]="showColums">{{item.FromIACodeName}}</td>
-        <td [hidden]="showColums">{{item.FromIACodeFees}}</td>
+        <td [hidden]="!showColums">{{item.FromIACodeName}}</td>
+        <td [hidden]="!showColums">{{item.FromIACodeFees}}</td>
         <td>{{item.ToIACode}}</td>
-        <td [hidden]="showColums">{{item.ToIACodeName}}</td>
-        <td [hidden]="showColums">{{item.ToIACodeFees}}</td>
+        <td [hidden]="!showColums">{{item.ToIACodeName}}</td>
+        <td [hidden]="!showColums">{{item.ToIACodeFees}}</td>
         <td>{{item.EffectiveDate}}</td>
         <td>{{item.EndDate}}</td>
         <td>{{item.Action}}</td>

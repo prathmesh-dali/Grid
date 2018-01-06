@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'app';
   data= []
   constructor(){
-    for (let i = 0; i < 64000; i++) {
+    for (let i = 0; i < 6400; i++) {
       this.data.push({
         Action: 'Add',
         ChangeTrackingId: '285497',

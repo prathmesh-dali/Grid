@@ -1,0 +1,59 @@
+<div>
+  <button type="button" (click)="toggleColumns()">{{showColums?'Hide':'Show'}}</button>
+  <table border="1">
+    <thead>
+      <tr>
+        <th (click)="onSortClick('FromIACode')">
+          IA Code
+          <input (input)="addFilter($event)" name="FromIACode">
+        </th>
+        <th (click)="onSortClick('FromIACodeName')" [hidden]="showColums">
+          Online Name
+        </th>
+        <th (click)="onSortClick('FromIACodeFees')" [hidden]="showColums">
+          Annual Basic Fee
+        </th>
+        <th (click)="onSortClick('ToIACode')">
+          IA Code
+          <input (input)="addFilter($event)" name="ToIACode">
+        </th>
+        <th (click)="onSortClick('ToIACodeName')" [hidden]="showColums">
+          Online Name
+        </th>
+        <th (click)="onSortClick('ToIACodeFees')" [hidden]="showColums">
+          Annual Basic Fee
+        </th>
+        <th (click)="onSortClick('EffectiveDate')">
+          Effective Date
+        </th>
+        <th (click)="onSortClick('EndDate')">
+          End Date
+        </th>
+        <th (click)="onSortClick('Action')">
+          Operation
+        </th>
+        <th (click)="onSortClick('ValidationStatus')">
+          Validation Status
+        </th>
+        <th (click)="onSortClick('Remarks')">
+          Remarks
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data | filter: filterColumn : values | sort: sortBy: asc">
+        <td>{{item.FromIACode}}</td>
+        <td [hidden]="showColums">{{item.FromIACodeName}}</td>
+        <td [hidden]="showColums">{{item.FromIACodeFees}}</td>
+        <td>{{item.ToIACode}}</td>
+        <td [hidden]="showColums">{{item.ToIACodeName}}</td>
+        <td [hidden]="showColums">{{item.ToIACodeFees}}</td>
+        <td>{{item.EffectiveDate}}</td>
+        <td>{{item.EndDate}}</td>
+        <td>{{item.Action}}</td>
+        <td>{{item.ValidationStatus}}</td>
+        <td>{{item.Remarks}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

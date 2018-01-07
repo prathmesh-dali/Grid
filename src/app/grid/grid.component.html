@@ -1,80 +1,153 @@
 <div>
   <button type="button" (click)="toggleColumns()">{{showColums?'Hide Columns':'Show Columns'}}</button>
   <button type="button" (click)="toggleFilters()">{{showFilter?'Hide Filters':'Show Filters'}}</button>
-  <table border="1">
-    <thead>
+  <button type="button" (click)="downloadXls()">Download</button>
+</div>
+<div class="table-container" [ngStyle]="{'padding-top': showFilter? '5.1em' : '3.42em'}">
+  <div><div [ngStyle]="{'width': showColums? '675px':'170px'}"></div></div>
+  <div></div>
+  <div *ngIf="showFilter"></div>
+  <table cellspacing="0">
+    <thead id="datagrid">
       <tr>
-        <th (click)="onSortClick('FromIACode')">
-          IA Code
+        <th [attr.colspan]="showColums?3:1">
+          <div>Source</div>
         </th>
-        <th (click)="onSortClick('FromIACodeName')" [hidden]="!showColums">
-          Online Name
+        <th [attr.colspan]="showColums?3:1">
+          <div>Destination</div>
         </th>
-        <th (click)="onSortClick('FromIACodeFees')" [hidden]="!showColums">
-          Annual Basic Fee
+        <th>
+          <div (click)="onSortClick('EffectiveDate')" style="cursor: pointer">Effective Date
+            <i *ngIf="sortBy==='EffectiveDate' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='EffectiveDate' && !asc" class="arrow down"></i>
+          </div>
+
         </th>
-        <th (click)="onSortClick('ToIACode')">
-          IA Code
+        <th>
+          <div (click)="onSortClick('EndDate')" style="cursor: pointer">End Date
+            <i *ngIf="sortBy==='EndDate' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='EndDate' && !asc" class="arrow down"></i>
+          </div>
         </th>
-        <th (click)="onSortClick('ToIACodeName')" [hidden]="!showColums">
-          Online Name
+        <th>
+          <div (click)="onSortClick('Action')" style="cursor: pointer">Operation
+            <i *ngIf="sortBy==='Action' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='Action' && !asc" class="arrow down"></i>
+          </div>
         </th>
-        <th (click)="onSortClick('ToIACodeFees')" [hidden]="!showColums">
-          Annual Basic Fee
+        <th>
+          <div (click)="onSortClick('ValidationStatus')" style="cursor: pointer">Validation Status
+            <i *ngIf="sortBy==='ValidationStatus' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='ValidationStatus' && !asc" class="arrow down"></i>
+          </div>
         </th>
-        <th (click)="onSortClick('EffectiveDate')">
-          Effective Date
-        </th>
-        <th (click)="onSortClick('EndDate')">
-          End Date
-        </th>
-        <th (click)="onSortClick('Action')">
-          Operation
-        </th>
-        <th (click)="onSortClick('ValidationStatus')">
-          Validation Status
-        </th>
-        <th (click)="onSortClick('Remarks')">
-          Remarks
+        <th>
+          <div (click)="onSortClick('Remarks')" style="cursor: pointer">Remarks
+            <i *ngIf="sortBy==='Remarks' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='Remarks' && !asc" class="arrow down"></i>
+          </div>
         </th>
       </tr>
-      <tr [hidden]="!showFilter">
-          <td>
-            <input (input)="addFilter($event)" name="FromIACode">
-          </td>
-          <td [hidden]="!showColums">
-              <input (input)="addFilter($event)" name="FromIACodeName">
-          </td>
-          <td [hidden]="!showColums">
-              <input (input)="addFilter($event)" name="FromIACodeFees">
-          </td>
-          <td>
-            <input (input)="addFilter($event)" name="ToIACode">
-          </td>
-          <td [hidden]="!showColums">
-              <input (input)="addFilter($event)" name="ToIACodeName">
-          </td>
-          <td [hidden]="!showColums">
-              <input (input)="addFilter($event)" name="ToIACodeFees">
-          </td>
-          <td>
-              <input (input)="addFilter($event)" name="EffectiveDate">
-          </td>
-          <td>
-              <input (input)="addFilter($event)" name="EndDate">
-          </td>
-          <td>
-              <input (input)="addFilter($event)" name="Action">
-          </td>
-          <td>
-              <input (input)="addFilter($event)" name="ValidationStatus">
-          </td>
-          <td>
-              <input (input)="addFilter($event)" name="Remarks">
-          </td>
-        </tr>
+      <tr>
+        <th>
+          <div (click)="onSortClick('FromIACode')" style="cursor: pointer">IA Code
+            <i *ngIf="sortBy==='FromIACode' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='FromIACode' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 63px;" (input)="addFilter($event)" name="FromIACode">
+          </div>
+        </th>
+        <th [hidden]="!showColums">
+          <div (click)="onSortClick('FromIACodeName')" style="cursor: pointer">Online Name
+            <i *ngIf="sortBy==='FromIACodeName' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='FromIACodeName' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 96px;" (input)="addFilter($event)" name="FromIACodeName">
+          </div>
+        </th>
+        <th [hidden]="!showColums">
+          <div (click)="onSortClick('FromIACodeFees')" style="cursor: pointer">Annual Basic Fee
+            <i *ngIf="sortBy==='FromIACodeFees' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='FromIACodeFees' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 124px;" (input)="addFilter($event)" name="FromIACodeFees">
+          </div>
+        </th>
+        <th>
+          <div (click)="onSortClick('ToIACode')" style="cursor: pointer">IA Code
+            <i *ngIf="sortBy==='ToIACode' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='ToIACode' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 76px;" (input)="addFilter($event)" name="ToIACode">
+          </div>
+        </th>
+        <th [hidden]="!showColums">
+          <div (click)="onSortClick('ToIACodeName')" style="cursor: pointer">Online Name
+            <i *ngIf="sortBy==='ToIACodeName' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='ToIACodeName' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 96px;" (input)="addFilter($event)" name="ToIACodeName">
+          </div>
+        </th>
+        <th [hidden]="!showColums">
+          <div (click)="onSortClick('ToIACodeFees')" style="cursor: pointer">Annual Basic Fee
+            <i *ngIf="sortBy==='ToIACodeFees' && asc" class="arrow up"></i>
+            <i *ngIf="sortBy==='ToIACodeFees' && !asc" class="arrow down"></i>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 124px;" (input)="addFilter($event)" name="ToIACodeFees">
+          </div>
+        </th>
+        <th>
+          <div>
+            <span style="visibility: hidden">ABC</span>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 150px;" (input)="addFilter($event)" name="EffectiveDate">
+          </div>
+        </th>
+        <th>
+          <div>
+            <span style="visibility: hidden">ABC</span>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 150px;" (input)="addFilter($event)" name="EndDate">
+          </div>
+        </th>
+        <th>
+          <div>
+            <span style="visibility: hidden">ABC</span>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 78px;" (input)="addFilter($event)" name="Action">
+          </div>
+        </th>
+        <th>
+          <div>
+            <span style="visibility: hidden">ABC</span>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 118px;" (input)="addFilter($event)" name="ValidationStatus">
+          </div>
+        </th>
+        <th>
+          <div>
+            <span style="visibility: hidden">ABC</span>
+          </div>
+          <div *ngIf="showFilter">
+            <input style="width: 78px;" (input)="addFilter($event)" name="Remarks">
+          </div>
+        </th>
+      </tr>
+
     </thead>
     <tbody>
+
       <tr *ngFor="let item of data | filter: filterColumn : values | sort: sortBy: asc">
         <td>{{item.FromIACode}}</td>
         <td [hidden]="!showColums">{{item.FromIACodeName}}</td>
@@ -88,6 +161,20 @@
         <td>{{item.ValidationStatus}}</td>
         <td>{{item.Remarks}}</td>
       </tr>
+      <tr style="visibility: hidden">
+        <td style="min-width: 67px;"></td>
+        <td style="min-width: 100px;" [hidden]="!showColums"></td>
+        <td style="min-width: 128px;" [hidden]="!showColums"></td>
+        <td style="min-width: 80px;"></td>
+        <td style="min-width: 100px;" [hidden]="!showColums"></td>
+        <td style="min-width: 128px;" [hidden]="!showColums"></td>
+        <td style="min-width: 154px;"></td>
+        <td style="min-width: 154px;"></td>
+        <td style="min-width: 82px;"></td>
+        <td style="min-width: 122px;"></td>
+        <td style="min-width: 82px;"></td>
+      </tr>
     </tbody>
   </table>
 </div>
+<div>Total Count: {{(data | filter: filterColumn : values).length}}</div>

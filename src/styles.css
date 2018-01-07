@@ -1,6 +1,106 @@
-/* You can add global styles to this file, and also import other style files */
-tbody {
-    height: 100px;       /* Just for the demo          */
-    overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden;  /* Hide the horizontal scroll */
+.table-container {
+  border: 1px solid #963;
+  display: inline-block;
+  height: 150px;
+  padding-top: 1.875em;
+  position: relative;
+}
+.table-container > div {
+  border-color: #888;
+  border-style: solid;
+  border-width: 1px 1px 0px 1px;
+  height: 1.7em;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.table-container > div >div {
+  border-color: #888;
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  height: 1.6em;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.table-container > div + div{
+  border-color: #888;
+  border-style: solid;
+  border-width: 0px 1px 2px 1px;
+  height: 1.7em;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 1.7em;
+}
+.table-container > div + div + div{
+  border-color: #888;
+  border-style: solid;
+  border-width: 0px 1px 2px 1px;
+  height: 1.7em;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 3.4em;
+}
+table {
+  display: block;
+  height: 150px;
+  overflow-y: auto;
+}
+th {
+  padding: 0 5px;
+  text-align: center;
+}
+th:first-child > div {
+  border-left: none;
+  padding-left: 7px;
+  word-wrap: break-word
+}
+thead> tr:first-child  th > div {
+  border-left: 2px solid #888;
+  line-height: 1.875em;
+  margin-left: -6px;
+  padding-left: 5px;
+  position: absolute;
+  top: 0;
+}
+th > div {
+  border-left: 2px solid #888;
+  line-height: 1.875em;
+  margin-left: -6px;
+  padding-left: 5px;
+  position: absolute;
+  top: 1.7em;
+}
+th > div + div{
+  border-left: 2px solid #888;
+  line-height: 1.875em;
+  margin-left: -6px;
+  padding-left: 5px;
+  position: absolute;
+  top: 3.4em;
+}
+td {
+  border-color: #888;
+  border-style: solid;
+  border-width: 0 1px 2px 1px;
+  padding: 5px;
+}
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
